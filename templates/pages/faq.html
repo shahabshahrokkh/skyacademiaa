@@ -1,0 +1,76 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}سوالات متداول (FAQ){% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px 70px; max-width: 860px;">
+  
+  <div style="text-align: center; margin-bottom: 40px;">
+    <span class="section-tag">پاسخ به ابهامات شما</span>
+    <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--dark); margin-bottom: 12px;">سوالات متداول</h1>
+    <p style="color: var(--text-muted);">
+      پاسخ مهم‌ترین سوالات در زمینه نحوه برگزاری کلاس‌ها، اساتید، شهریه و شرایط بازگشت وجه.
+    </p>
+  </div>
+
+  <!-- FAQ Accordion with Alpine.js -->
+  <div x-data="{ activeAccordion: null }" style="display: flex; flex-direction: column; gap: 14px;">
+    
+    {% if faqs %}
+      {% for faq in faqs %}
+        <div style="background: #fff; border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm);">
+          <button type="button" 
+                  @click="activeAccordion = (activeAccordion === {{ forloop.counter }} ? null : {{ forloop.counter }})"
+                  style="width: 100%; text-align: right; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border: none; background: none; cursor: pointer; font-size: 1.05rem; font-weight: 700; color: var(--dark);">
+            <span>{{ faq.question }}</span>
+            <i class="fa-solid" :class="activeAccordion === {{ forloop.counter }} ? 'fa-chevron-up' : 'fa-chevron-down'" style="color: var(--primary); font-size: 0.9rem;"></i>
+          </button>
+          
+          <div x-show="activeAccordion === {{ forloop.counter }}" 
+               x-collapse
+               style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; border-top: 1px solid var(--border-color);">
+            {{ faq.answer|linebreaks }}
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <!-- Demo FAQs if empty -->
+      <div style="background: #fff; border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm);">
+        <button type="button" @click="activeAccordion = (activeAccordion === 1 ? null : 1)"
+                style="width: 100%; text-align: right; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border: none; background: none; cursor: pointer; font-size: 1.05rem; font-weight: 700; color: var(--dark);">
+          <span>کلاس‌ها در چه بستری برگزار می‌شوند؟</span>
+          <i class="fa-solid" :class="activeAccordion === 1 ? 'fa-chevron-up' : 'fa-chevron-down'" style="color: var(--primary);"></i>
+        </button>
+        <div x-show="activeAccordion === 1" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; border-top: 1px solid var(--border-color);">
+          کلاس‌ها در بستر پلتفرم اختصاصی آموزش آنلاین با امکان اشتراک‌گذاری تخته هوشمند، ویدیو، صدا و ارسال فایل‌های آموزشی بدون نیاز به نصب نرم‌افزار جانبی برگزار می‌شود.
+        </div>
+      </div>
+
+      <div style="background: #fff; border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm);">
+        <button type="button" @click="activeAccordion = (activeAccordion === 2 ? null : 2)"
+                style="width: 100%; text-align: right; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border: none; background: none; cursor: pointer; font-size: 1.05rem; font-weight: 700; color: var(--dark);">
+          <span>ضمانت بازگشت وجه به چه صورت است؟</span>
+          <i class="fa-solid" :class="activeAccordion === 2 ? 'fa-chevron-up' : 'fa-chevron-down'" style="color: var(--primary);"></i>
+        </button>
+        <div x-show="activeAccordion === 2" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; border-top: 1px solid var(--border-color);">
+          در صورتی که پس از پایان جلسه اول آموزشی به هر دلیلی رضایت کافی نداشتید، کافی است ظرف مدت ۲۴ ساعت موضوع را به پشتیبانی اطلاع دهید تا کل مبلغ بدون کسر کارمزد مسترد گردد.
+        </div>
+      </div>
+
+      <div style="background: #fff; border-radius: var(--radius-md); border: 1px solid var(--border-color); overflow: hidden; box-shadow: var(--shadow-sm);">
+        <button type="button" @click="activeAccordion = (activeAccordion === 3 ? null : 3)"
+                style="width: 100%; text-align: right; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; border: none; background: none; cursor: pointer; font-size: 1.05rem; font-weight: 700; color: var(--dark);">
+          <span>آیا امکان تغییر ساعت یا جابجایی جلسه وجود دارد؟</span>
+          <i class="fa-solid" :class="activeAccordion === 3 ? 'fa-chevron-up' : 'fa-chevron-down'" style="color: var(--primary);"></i>
+        </button>
+        <div x-show="activeAccordion === 3" style="padding: 0 24px 20px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.8; border-top: 1px solid var(--border-color);">
+          بله، با هماهنگی حداقل ۱۲ ساعت قبل از شروع تایم کلاس، می‌توانید زمان جلسه را بدون سوختن اعتبار به ساعت دیگری موکول نمایید.
+        </div>
+      </div>
+    {% endif %}
+
+  </div>
+
+</div>
+{% endblock %}

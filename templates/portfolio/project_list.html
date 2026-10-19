@@ -1,0 +1,59 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}نمونه کارها، افتخارات و سوابق{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px 70px;">
+  
+  <div style="text-align: center; margin-bottom: 40px;">
+    <span class="section-tag">سوابق، افتخارات و دستاوردها</span>
+    <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--dark); margin-bottom: 12px;">پروژه‌ها و کارنامه موفقیت</h1>
+    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+      مشاهده پروژه‌های اجرا شده، کارنامه زبان‌آموزان موفق و دوره‌های برگزار شده سازمانی.
+    </p>
+  </div>
+
+  <div class="services-grid">
+    {% for project in projects %}
+      <div class="service-card">
+        <div class="service-card-image" style="height: 200px;">
+          {% if project.cover_image %}
+            <img src="{{ project.cover_image.url }}" alt="{{ project.title }}">
+          {% else %}
+            <i class="fa-solid fa-briefcase" style="font-size: 3rem; color: var(--secondary);"></i>
+          {% endif %}
+          {% if project.category %}
+            <span class="badge badge-secondary service-badge-cat">{{ project.category.title }}</span>
+          {% endif %}
+        </div>
+
+        <div class="service-card-body">
+          {% if project.client %}
+            <div style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 6px;">
+              <i class="fa-solid fa-user-tie"></i> کارفرما / متقاضی: {{ project.client }}
+            </div>
+          {% endif %}
+          <h3 class="service-title">
+            <a href="{{ project.get_absolute_url }}">{{ project.title }}</a>
+          </h3>
+          <p class="service-desc">{{ project.short_description|truncatechars:120 }}</p>
+
+          <div class="service-meta">
+            <a href="{{ project.get_absolute_url }}" class="btn btn-outline-primary btn-sm" style="width: 100%;">
+              مشاهده شرح کامل دستاورد <i class="fa-solid fa-arrow-left"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: #fff; border-radius: 16px; border: 1px dashed var(--border-color);">
+        <i class="fa-solid fa-folder-open" style="font-size: 3rem; color: var(--text-light); margin-bottom: 16px;"></i>
+        <h3 style="color: var(--dark); font-size: 1.2rem; margin-bottom: 8px;">پروژه‌ای جهت نمایش یافت نشد</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">به زودی نمونه کارها و سوابق جدید در این بخش بارگذاری می‌شود.</p>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

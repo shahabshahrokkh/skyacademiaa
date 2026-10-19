@@ -1,0 +1,128 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock %}
+{% block meta_description %}{{ post.summary }}{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px 70px;">
+
+  <!-- Breadcrumb -->
+  <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px;">
+    <a href="{% url 'core:home' %}">صفحه اصلی</a> &larr;
+    <a href="{% url 'blog:post_list' %}">وبلاگ</a> &larr;
+    <span style="color: var(--primary); font-weight: 600;">{{ post.title }}</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 2.2fr 1fr; gap: 40px; align-items: start;">
+    
+    <!-- Article Body -->
+    <article style="background: #fff; border-radius: var(--radius-md); padding: 36px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+      
+      {% if post.category %}
+        <span class="badge badge-primary" style="margin-bottom: 14px;">{{ post.category.title }}</span>
+      {% endif %}
+
+      <h1 style="font-size: 2.1rem; font-weight: 900; color: var(--dark); line-height: 1.4; margin-bottom: 16px;">
+        {{ post.title }}
+      </h1>
+
+      <div style="display: flex; gap: 20px; font-size: 0.85rem; color: var(--text-muted); padding-bottom: 20px; border-bottom: 1px solid var(--border-color); margin-bottom: 24px; flex-wrap: wrap;">
+        <span><i class="fa-regular fa-user"></i> نویسنده: {{ post.author.get_full_name|default:post.author.username }}</span>
+        <span><i class="fa-regular fa-calendar"></i> تاریخ: {{ post.published_at|date:"Y/m/d" }}</span>
+        <span><i class="fa-regular fa-clock"></i> زمان مطالعه: {{ post.reading_time }} دقیقه</span>
+        <span><i class="fa-regular fa-eye"></i> بازدید: {{ post.views_count }}</span>
+      </div>
+
+      {% if post.cover_image %}
+        <div style="border-radius: var(--radius-md); overflow: hidden; margin-bottom: 28px;">
+          <img src="{{ post.cover_image.url }}" alt="{{ post.title }}" style="width: 100%; max-height: 420px; object-fit: cover;">
+        </div>
+      {% endif %}
+
+      <div style="background: var(--primary-bg); border-right: 4px solid var(--primary); padding: 18px 22px; border-radius: 4px; margin-bottom: 28px; font-weight: 500; line-height: 1.8; color: var(--dark);">
+        {{ post.summary }}
+      </div>
+
+      <div style="color: var(--text-main); font-size: 1.05rem; line-height: 2.1; margin-bottom: 40px;">
+        {{ post.content|linebreaks }}
+      </div>
+
+      <!-- Comments Section -->
+      <section style="border-top: 1px solid var(--border-color); padding-top: 30px; margin-top: 30px;">
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--dark); margin-bottom: 20px;">
+          دیدگاه‌ها ({{ comments.count }})
+        </h3>
+
+        {% for comment in comments %}
+          <div style="background: var(--bg-body); border-radius: var(--radius-sm); padding: 16px 20px; margin-bottom: 14px; border: 1px solid var(--border-color);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-weight: 700; color: var(--primary);">{{ comment.name }}</span>
+              <span style="font-size: 0.8rem; color: var(--text-light);">{{ comment.created_at|date:"Y/m/d" }}</span>
+            </div>
+            <p style="font-size: 0.92rem; color: var(--text-main); line-height: 1.7;">{{ comment.message }}</p>
+          </div>
+        {% empty %}
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">اولین نفری باشید که برای این مقاله دیدگاه ثبت می‌کند.</p>
+        {% endfor %}
+
+        <!-- Comment Form -->
+        <div style="background: #fff; border: 1px solid var(--border-color); border-radius: var(--radius-sm); padding: 22px; margin-top: 24px;">
+          <h4 style="font-weight: 700; color: var(--dark); margin-bottom: 14px;">ارسال نظر</h4>
+          <form action="{% url 'blog:submit_comment' post.slug %}" method="post">
+            {% csrf_token %}
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px;">
+              <input type="text" name="name" required class="form-control" placeholder="نام شما">
+              <input type="email" name="email" required class="form-control" placeholder="ایمیل شما (نمایش داده نمی‌شود)">
+            </div>
+            <div class="form-group">
+              <textarea name="message" rows="4" required class="form-control" placeholder="دیدگاه یا سوال شما درباره این مطلب..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-secondary btn-sm">
+              <i class="fa-solid fa-paper-plane"></i> ثبت دیدگاه
+            </button>
+          </form>
+        </div>
+      </section>
+
+    </article>
+
+    <!-- Sidebar -->
+    <aside style="display: flex; flex-direction: column; gap: 24px;">
+      
+      <!-- CTA Box -->
+      <div style="background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: var(--radius-md); padding: 26px; color: #fff; text-align: center;">
+        <i class="fa-solid fa-graduation-cap" style="font-size: 2.2rem; margin-bottom: 12px;"></i>
+        <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">نیاز به یادگیری تخصصی دارید؟</h3>
+        <p style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 18px; line-height: 1.7;">با همراهی اساتید مجرب در کوتاه‌ترین زمان به اهداف خود برسید.</p>
+        <button class="btn btn-light btn-sm" style="width: 100%;" @click="modalConsultOpen = true">
+          مشاوره تلفنی رایگان
+        </button>
+      </div>
+
+      <!-- Recent Posts -->
+      <div style="background: #fff; border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+        <h4 style="font-size: 1.05rem; font-weight: 800; color: var(--dark); margin-bottom: 16px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
+          دیگر مطالب خواندنی
+        </h4>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          {% for rpost in recent_posts %}
+            <a href="{{ rpost.get_absolute_url }}" style="display: flex; gap: 12px; align-items: center;">
+              <div style="width: 50px; height: 50px; border-radius: 8px; background: var(--primary-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--primary);">
+                <i class="fa-regular fa-file-lines"></i>
+              </div>
+              <div>
+                <h5 style="font-size: 0.88rem; font-weight: 600; color: var(--dark); line-height: 1.4; margin-bottom: 4px;">{{ rpost.title|truncatechars:48 }}</h5>
+                <span style="font-size: 0.75rem; color: var(--text-light);">{{ rpost.published_at|date:"Y/m/d" }}</span>
+              </div>
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+
+    </aside>
+
+  </div>
+
+</div>
+{% endblock %}

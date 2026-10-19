@@ -1,0 +1,96 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}تماس با ما | پشتیبانی اسکای آکادمیا{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px 80px;">
+  
+  <div style="text-align: center; margin-bottom: 40px;">
+    <span class="section-tag">پاسخگویی سریع</span>
+    <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--dark); margin-bottom: 12px;">ارتباط با ما</h1>
+    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+      هرگونه سوال، پیشنهاد یا نیاز به پشتیبانی را از طریق فرم زیر یا راه‌های ارتباطی با ما در میان بگذارید.
+    </p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 40px; align-items: start;">
+    
+    <!-- Contact Info Cards -->
+    <div style="display: flex; flex-direction: column; gap: 20px;">
+      
+      <div style="background: #fff; border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 16px;">
+        <div style="width: 50px; height: 50px; border-radius: 12px; background: var(--primary-bg); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">شماره تماس پشتیبانی</div>
+          <div style="font-size: 1.1rem; font-weight: 700; color: var(--dark);">{{ site_settings.phone|default:"۰۲۱-۱۲۳۴۵۶۷۸" }}</div>
+        </div>
+      </div>
+
+      <div style="background: #fff; border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 16px;">
+        <div style="width: 50px; height: 50px; border-radius: 12px; background: var(--secondary-light); color: var(--secondary); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">ایمیل ارتباطی</div>
+          <div style="font-size: 1.05rem; font-weight: 700; color: var(--dark);">{{ site_settings.email|default:"info@sky-accademia.ir" }}</div>
+        </div>
+      </div>
+
+      <div style="background: #fff; border-radius: var(--radius-md); padding: 24px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm); display: flex; align-items: center; gap: 16px;">
+        <div style="width: 50px; height: 50px; border-radius: 12px; background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">
+          <i class="fa-solid fa-headset"></i>
+        </div>
+        <div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">ساعات پاسخگویی تلفنی</div>
+          <div style="font-size: 1rem; font-weight: 700; color: var(--dark);">شنبه تا پنجشنبه: ۹ الی ۲۱</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Contact Form -->
+    <div style="background: #fff; border-radius: var(--radius-md); padding: 36px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+      <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--dark); margin-bottom: 20px;">ارسال پیام مستقیم</h3>
+      
+      <form method="post">
+        {% csrf_token %}
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div>
+            <label class="form-label">نام و نام خانوادگی</label>
+            {{ form.name }}
+          </div>
+          <div>
+            <label class="form-label">ایمیل</label>
+            {{ form.email }}
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+          <div>
+            <label class="form-label">شماره تماس</label>
+            {{ form.phone }}
+          </div>
+          <div>
+            <label class="form-label">موضوع پیام</label>
+            {{ form.subject }}
+          </div>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 24px;">
+          <label class="form-label">متن پیام شما</label>
+          {{ form.message }}
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="padding: 12px 32px;">
+          <i class="fa-solid fa-paper-plane"></i> ارسال پیام
+        </button>
+      </form>
+    </div>
+
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}ویرایش پروفایل کاربری{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px 80px; max-width: 650px;">
+  <div style="background: #fff; border-radius: var(--radius-md); padding: 36px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+    
+    <div style="margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+      <h1 style="font-size: 1.6rem; font-weight: 800; color: var(--dark); margin-bottom: 4px;">اطلاعات حساب کاربری</h1>
+      <p style="font-size: 0.88rem; color: var(--text-muted);">اطلاعات فردی و تماس خود را بروزرسانی نمایید.</p>
+    </div>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div class="form-group">
+          <label class="form-label">نام</label>
+          {{ form.first_name }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">نام خانوادگی</label>
+          {{ form.last_name }}
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px;">
+        <div class="form-group">
+          <label class="form-label">ایمیل</label>
+          {{ form.email }}
+        </div>
+        <div class="form-group">
+          <label class="form-label">تلفن همراه</label>
+          {{ form.phone }}
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label class="form-label">شهر</label>
+        {{ form.city }}
+      </div>
+
+      <div class="form-group" style="margin-bottom: 16px;">
+        <label class="form-label">درباره من / بیوگرافی کوتاه</label>
+        {{ form.bio }}
+      </div>
+
+      <div class="form-group" style="margin-bottom: 24px;">
+        <label class="form-label">تصویر آواتار</label>
+        {{ form.avatar }}
+      </div>
+
+      <div style="display: flex; gap: 12px;">
+        <button type="submit" class="btn btn-primary">
+          <i class="fa-solid fa-check"></i> ذخیره تغییرات
+        </button>
+        <a href="{% url 'accounts:dashboard' %}" class="btn btn-light">بازگشت به پیشخوان</a>
+      </div>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

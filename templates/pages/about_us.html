@@ -1,0 +1,79 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}درباره ما | داستان و تیم اسکای آکادمیا{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px 70px;">
+  
+  <!-- About Intro -->
+  <div style="text-align: center; max-width: 750px; margin: 0 auto 50px;">
+    <span class="section-tag">داستان ما</span>
+    <h1 style="font-size: 2.3rem; font-weight: 800; color: var(--dark); margin-bottom: 16px;">آموزش بدون مرز، هوشمند و نتیجه‌گرا</h1>
+    <p style="color: var(--text-muted); font-size: 1.05rem; line-height: 1.9;">
+      اسکای آکادمیا با هدف ایجاد دسترسی برابر به برترین اساتید و دوره‌های آموزشی شکل گرفته است. ما باور داریم یادگیری باید انعطاف‌پذیر، اثربخش و متناسب با اهداف شخصی و شغلی هر فرد باشد.
+    </p>
+  </div>
+
+  <!-- Mission / Vision Cards -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-bottom: 60px;">
+    <div style="background: #fff; border-radius: var(--radius-md); padding: 30px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+      <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--primary-bg); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px;">
+        <i class="fa-solid fa-bullseye"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 10px;">ماموریت ما</h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.8;">
+        تسهیل فرآیند یادگیری زبان و مهارت‌های نوین برای دانش‌آموزان، دانشجویان و مدیران از طریق متدهای شخصی‌سازی شده و بستر آموزشی آنلاین پایدار.
+      </p>
+    </div>
+
+    <div style="background: #fff; border-radius: var(--radius-md); padding: 30px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+      <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--secondary-light); color: var(--secondary); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px;">
+        <i class="fa-solid fa-gem"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 10px;">ارزش‌های بنیادین</h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.8;">
+        تضمین کیفیت آموزش، شفافیت هزینه‌ها، پشتیبانی مستمر تا رسیدن به هدف و احترام به زمان و تعهدات دانش‌پذیران.
+      </p>
+    </div>
+
+    <div style="background: #fff; border-radius: var(--radius-md); padding: 30px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+      <div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent-light); color: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; margin-bottom: 16px;">
+        <i class="fa-solid fa-chart-line"></i>
+      </div>
+      <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--dark); margin-bottom: 10px;">چشم‌انداز آینده</h3>
+      <p style="color: var(--text-muted); font-size: 0.92rem; line-height: 1.8;">
+        تبدیل شدن به معتبرترین مرجع ارزیابی، آموزش و توانمندسازی مهارت‌های بین‌المللی با تلفیق فناوری‌های هوش مصنوعی در آموزش.
+      </p>
+    </div>
+  </div>
+
+  <!-- Team Members Grid -->
+  {% if team %}
+    <div style="margin-bottom: 60px;">
+      <div class="section-header">
+        <span class="section-tag">اساتید و تیم علمی</span>
+        <h2 class="section-title">با کادر آموزشی ما آشنا شوید</h2>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 24px;">
+        {% for member in team %}
+          <div style="background: #fff; border-radius: var(--radius-md); padding: 24px; text-align: center; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+            <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; margin: 0 auto 16px; background: var(--primary-bg); display: flex; align-items: center; justify-content: center;">
+              {% if member.avatar %}
+                <img src="{{ member.avatar.url }}" alt="{{ member.name }}" style="width:100%; height:100%; object-fit:cover;">
+              {% else %}
+                <i class="fa-solid fa-user-graduate" style="font-size: 2.2rem; color: var(--primary);"></i>
+              {% endif %}
+            </div>
+            <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--dark); margin-bottom: 4px;">{{ member.name }}</h4>
+            <div style="font-size: 0.85rem; color: var(--secondary); font-weight: 600; margin-bottom: 10px;">{{ member.role }}</div>
+            <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.6;">{{ member.bio|truncatechars:80 }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

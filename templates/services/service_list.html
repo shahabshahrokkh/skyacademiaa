@@ -1,0 +1,80 @@
+{% extends 'base/base.html' %}
+{% load static humanize %}
+
+{% block title %}لیست خدمات و دوره‌های آموزشی{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px 70px;">
+  
+  <!-- Header / Breadcrumbs -->
+  <div style="text-align: center; margin-bottom: 40px;">
+    <span class="section-tag">کاتالوگ خدمات و دوره‌ها</span>
+    <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--dark); margin-bottom: 12px;">خدمات و آموزش‌های تخصصی</h1>
+    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+      لیست کامل دوره‌ها، کلاس‌های آنلاین و خدمات مشاوره‌ای با امکان رزرو جلسه یا مشاوره رایگان.
+    </p>
+  </div>
+
+  <!-- Category Filter Pills -->
+  <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 36px;">
+    <a href="{% url 'services:service_list' %}" 
+       class="btn btn-sm {% if not selected_category %}btn-primary{% else %}btn-light{% endif %}" style="border-radius: 20px;">
+      همه دسته‌ها
+    </a>
+    {% for cat in categories %}
+      <a href="{% url 'services:service_list' %}?category={{ cat.slug }}" 
+         class="btn btn-sm {% if selected_category == cat.slug %}btn-primary{% else %}btn-light{% endif %}" style="border-radius: 20px;">
+        {{ cat.title }}
+      </a>
+    {% endfor %}
+  </div>
+
+  <!-- Services Grid -->
+  <div class="services-grid">
+    {% for service in services %}
+      <div class="service-card">
+        <div class="service-card-image">
+          {% if service.cover_image %}
+            <img src="{{ service.cover_image.url }}" alt="{{ service.title }}">
+          {% else %}
+            <i class="fa-solid {{ service.icon|default:'fa-book-open' }}" style="font-size: 3.5rem; color: var(--primary); opacity: 0.85;"></i>
+          {% endif %}
+          <span class="badge badge-primary service-badge-cat">{{ service.category.title }}</span>
+        </div>
+
+        <div class="service-card-body">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+            <span class="badge badge-secondary" style="font-size:0.75rem;">{{ service.get_level_display }}</span>
+            <span style="font-size:0.8rem; color:var(--text-light);"><i class="fa-regular fa-clock"></i> {{ service.duration }}</span>
+          </div>
+
+          <h3 class="service-title">
+            <a href="{{ service.get_absolute_url }}">{{ service.title }}</a>
+          </h3>
+          <p class="service-desc">{{ service.short_description|truncatechars:120 }}</p>
+
+          <div class="service-meta">
+            <div class="service-price">
+              {% if service.price > 0 %}
+                {{ service.price|intcomma }} <span>تومان / {{ service.price_unit }}</span>
+              {% else %}
+                <span>مشاوره و قیمت توافقی</span>
+              {% endif %}
+            </div>
+            <a href="{{ service.get_absolute_url }}" class="btn btn-primary btn-sm">
+              مشاهده جزئیات
+            </a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: #fff; border-radius: 16px; border: 1px dashed var(--border-color);">
+        <i class="fa-solid fa-box-open" style="font-size: 3rem; color: var(--text-light); margin-bottom: 16px;"></i>
+        <h3 style="color: var(--dark); font-size: 1.2rem; margin-bottom: 8px;">هنوز خدمتی در این بخش ثبت نشده است</h3>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">به زودی دوره‌ها و خدمات جدید اضافه خواهند شد.</p>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base/base.html' %}
+{% load static humanize %}
+
+{% block title %}نتایج جستجو برای: {{ query }}{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px 80px;">
+  
+  <div style="margin-bottom: 30px;">
+    <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--dark); margin-bottom: 8px;">
+      نتایج جستجو برای: <span style="color: var(--primary);">«{{ query }}»</span>
+    </h1>
+  </div>
+
+  {% if services or posts or projects %}
+    
+    {% if services %}
+      <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 16px; margin-top: 24px;">دوره‌ها و خدمات یافته شده:</h3>
+      <div class="services-grid" style="margin-bottom: 40px;">
+        {% for service in services %}
+          <div class="service-card">
+            <div class="service-card-body">
+              <span class="badge badge-primary" style="margin-bottom: 8px;">{{ service.category.title }}</span>
+              <h4 class="service-title"><a href="{{ service.get_absolute_url }}">{{ service.title }}</a></h4>
+              <p class="service-desc">{{ service.short_description|truncatechars:100 }}</p>
+              <a href="{{ service.get_absolute_url }}" class="btn btn-primary btn-sm">مشاهده</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if posts %}
+      <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--dark); margin-bottom: 16px;">مقالات مرتبط:</h3>
+      <div class="services-grid" style="margin-bottom: 40px;">
+        {% for post in posts %}
+          <div class="blog-card">
+            <div class="blog-card-content">
+              <h4 class="blog-title"><a href="{{ post.get_absolute_url }}">{{ post.title }}</a></h4>
+              <p style="font-size: 0.88rem; color: var(--text-muted);">{{ post.summary|truncatechars:90 }}</p>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+  {% else %}
+    <div style="text-align: center; padding: 60px 20px; background: #fff; border-radius: var(--radius-md); border: 1px dashed var(--border-color);">
+      <i class="fa-solid fa-magnifying-glass" style="font-size: 3rem; color: var(--text-light); margin-bottom: 16px;"></i>
+      <h3 style="color: var(--dark); font-size: 1.2rem; margin-bottom: 8px;">نتیجه‌ای برای جستجوی شما یافت نشد</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">می‌توانید با کلمات دیگری جستجو کنید یا همه خدمات را مشاهده نمایید.</p>
+      <a href="{% url 'services:service_list' %}" class="btn btn-primary btn-sm" style="margin-top: 16px;">مشاهده تمام خدمات</a>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

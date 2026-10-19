@@ -1,0 +1,53 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}وبلاگ و مقالات آموزشی{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px 70px;">
+  
+  <div style="text-align: center; margin-bottom: 40px;">
+    <span class="section-tag">دانستنی‌ها و آموزش‌ها</span>
+    <h1 style="font-size: 2.2rem; font-weight: 800; color: var(--dark); margin-bottom: 12px;">وبلاگ تخصصی اسکای آکادمیا</h1>
+    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+      جدیدترین نکات، متدهای یادگیری سریع، مقایسه آزمون‌ها و راهنماهای مهاجرت تحصیلی و کاری.
+    </p>
+  </div>
+
+  <div class="services-grid">
+    {% for post in posts %}
+      <div class="blog-card">
+        <div class="blog-card-img">
+          {% if post.cover_image %}
+            <img src="{{ post.cover_image.url }}" alt="{{ post.title }}">
+          {% else %}
+            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--primary-bg); color:var(--primary); font-size:2rem;">
+              <i class="fa-solid fa-newspaper"></i>
+            </div>
+          {% endif %}
+        </div>
+        <div class="blog-card-content">
+          <div class="blog-date">
+            <i class="fa-regular fa-clock"></i> {{ post.reading_time }} دقیقه مطالعه | {{ post.published_at|date:"Y/m/d" }}
+          </div>
+          <h3 class="blog-title">
+            <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+          </h3>
+          <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin-bottom:14px; flex:1;">
+            {{ post.summary|truncatechars:120 }}
+          </p>
+          <a href="{{ post.get_absolute_url }}" style="color:var(--secondary); font-weight:700; font-size:0.85rem; display:inline-flex; align-items:center; gap:6px;">
+            ادامه مطلب <i class="fa-solid fa-arrow-left"></i>
+          </a>
+        </div>
+      </div>
+    {% empty %}
+      <div style="grid-column: 1 / -1; text-align: center; padding: 60px 20px; background: #fff; border-radius: 16px; border: 1px dashed var(--border-color);">
+        <i class="fa-solid fa-pen-nib" style="font-size: 3rem; color: var(--text-light); margin-bottom: 16px;"></i>
+        <h3 style="color: var(--dark); font-size: 1.2rem; margin-bottom: 8px;">هنوز مقاله‌ای منتشر نشده است</h3>
+      </div>
+    {% endfor %}
+  </div>
+
+</div>
+{% endblock %}

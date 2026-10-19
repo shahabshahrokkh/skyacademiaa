@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}{{ project.title }}{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 40px 20px 80px; max-width: 960px;">
+  <article style="background: #fff; border-radius: var(--radius-md); padding: 36px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+    
+    {% if project.category %}
+      <span class="badge badge-secondary" style="margin-bottom: 12px;">{{ project.category.title }}</span>
+    {% endif %}
+
+    <h1 style="font-size: 2.1rem; font-weight: 800; color: var(--dark); margin-bottom: 16px;">
+      {{ project.title }}
+    </h1>
+
+    {% if project.client %}
+      <div style="font-size: 0.95rem; color: var(--text-muted); margin-bottom: 24px;">
+        <i class="fa-solid fa-building-user"></i> کارفرما / متقاضی: <strong>{{ project.client }}</strong>
+      </div>
+    {% endif %}
+
+    {% if project.cover_image %}
+      <div style="border-radius: var(--radius-md); overflow: hidden; margin-bottom: 28px;">
+        <img src="{{ project.cover_image.url }}" alt="{{ project.title }}" style="width: 100%; max-height: 440px; object-fit: cover;">
+      </div>
+    {% endif %}
+
+    <div style="font-size: 1.05rem; line-height: 2; color: var(--text-main); margin-bottom: 30px;">
+      {{ project.description|linebreaks }}
+    </div>
+
+    {% if project.project_url %}
+      <a href="{{ project.project_url }}" target="_blank" class="btn btn-primary">
+        <i class="fa-solid fa-up-right-from-square"></i> مشاهده لینک خارجی پروژه
+      </a>
+    {% endif %}
+  </article>
+</div>
+{% endblock %}

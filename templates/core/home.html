@@ -1,0 +1,461 @@
+{% extends 'base/base.html' %}
+{% load static humanize %}
+
+{% block title %}صفحه اصلی | پلتفرم آموزش و خدمات هوشمند{% endblock %}
+
+{% block content %}
+
+<!-- 1. Stories Highlights Bar (Like Tikkaa.ir) -->
+<section class="stories-section">
+  <div class="container">
+    <div class="stories-track">
+      <div class="story-item" @click="modalConsultOpen = true">
+        <div class="story-circle">
+          <div class="story-inner"><i class="fa-solid fa-chalkboard-user"></i></div>
+        </div>
+        <span class="story-title">اساتید برتر</span>
+      </div>
+
+      <div class="story-item" @click="modalConsultOpen = true">
+        <div class="story-circle" style="background: linear-gradient(135deg, #008C95, #00B4D8);">
+          <div class="story-inner"><i class="fa-solid fa-spell-check" style="color: #008C95;"></i></div>
+        </div>
+        <span class="story-title">تعیین سطح آنلاین</span>
+      </div>
+
+      <div class="story-item" @click="modalConsultOpen = true">
+        <div class="story-circle" style="background: linear-gradient(135deg, #FF7A00, #FFB703);">
+          <div class="story-inner"><i class="fa-solid fa-building" style="color: #FF7A00;"></i></div>
+        </div>
+        <span class="story-title">بسته‌های سازمانی</span>
+      </div>
+
+      <div class="story-item" @click="modalConsultOpen = true">
+        <div class="story-circle">
+          <div class="story-inner"><i class="fa-solid fa-shield-halved"></i></div>
+        </div>
+        <span class="story-title">ضمانت بازگشت</span>
+      </div>
+
+      <div class="story-item" @click="modalConsultOpen = true">
+        <div class="story-circle" style="background: linear-gradient(135deg, #7928CA, #FF0080);">
+          <div class="story-inner"><i class="fa-solid fa-comments" style="color: #7928CA;"></i></div>
+        </div>
+        <span class="story-title">پشتیبانی و چت</span>
+      </div>
+
+      <div class="story-item" @click="modalConsultOpen = true">
+        <div class="story-circle" style="background: linear-gradient(135deg, #10B981, #059669);">
+          <div class="story-inner"><i class="fa-solid fa-certificate" style="color: #10B981;"></i></div>
+        </div>
+        <span class="story-title">درخواست مدرک</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Hero Section -->
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-grid">
+      
+      <!-- Content -->
+      <div class="hero-content">
+        <div class="badge badge-primary" style="margin-bottom: 16px;">
+          <i class="fa-solid fa-bolt"></i> سریع‌ترین مسیر یادگیری و ارتقای مهارت
+        </div>
+        <h1>آموزش آنلاین و خدمات تخصصی با <span>برترین متخصصان</span></h1>
+        <p>
+          با متدهای نوین آموزشی، ساعات منعطف کلاسی و اساتید تاییدشده، یادگیری زبان و مهارت‌های کاری را بدون دغدغه و با تضمین کیفیت تجربه کنید.
+        </p>
+        
+        <div class="hero-cta">
+          <a href="{% url 'services:service_list' %}" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-compass"></i> مشاهده خدمات و دوره‌ها
+          </a>
+          <button type="button" class="btn btn-outline-primary btn-lg" @click="modalConsultOpen = true">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> مشاوره و تعیین سطح
+          </button>
+        </div>
+
+        <div class="hero-stats">
+          <div class="stat-box">
+            <span class="stat-num">+۵۰,۰۰۰</span>
+            <span class="stat-label">ساعت جلسه موفق</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">+۱۲۰</span>
+            <span class="stat-label">مدرس و متخصص ارشد</span>
+          </div>
+          <div class="stat-box">
+            <span class="stat-num">۹۸٪</span>
+            <span class="stat-label">رضایت دانش‌پذیران</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Graphic / Interactive Card -->
+      <div class="hero-visual">
+        <!-- Floating badge 1 -->
+        <div class="floating-badge floating-badge-1">
+          <div style="background:var(--secondary-light); color:var(--secondary); width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center;">
+            <i class="fa-solid fa-check-double"></i>
+          </div>
+          <div>
+            <div style="font-weight:700; font-size:0.85rem;">اساتید احراز هویت شده</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">تایید مدارک و صلاحیت تدریس</div>
+          </div>
+        </div>
+
+        <!-- Main Card -->
+        <div class="hero-card-main">
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 20px;">
+            <div style="font-weight:800; color:var(--primary); font-size:1.1rem;">رزرو سریع جلسه آموزشی</div>
+            <span class="badge badge-secondary">آنلاین و تعاملی</span>
+          </div>
+          
+          <div style="background:#fff; border-radius:12px; padding:16px; margin-bottom:14px; border:1px solid var(--border-color);">
+            <div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:4px;">موضوع مورد نظر</div>
+            <div style="font-weight:700; color:var(--dark); display:flex; align-items:center; justify-content:space-between;">
+              <span>مکالمه فشرده و آمادگی آیلتس</span>
+              <i class="fa-solid fa-chevron-down" style="font-size:0.8rem; color:var(--text-muted);"></i>
+            </div>
+          </div>
+
+          <div style="background:#fff; border-radius:12px; padding:16px; margin-bottom:20px; border:1px solid var(--border-color);">
+            <div style="font-size:0.82rem; color:var(--text-muted); margin-bottom:4px;">نوع آموزش</div>
+            <div style="font-weight:700; color:var(--dark); display:flex; align-items:center; justify-content:space-between;">
+              <span>کلاس اختصاصی ۱ به ۱ (خصوصی)</span>
+              <i class="fa-solid fa-video" style="color:var(--secondary);"></i>
+            </div>
+          </div>
+
+          <button type="button" class="btn btn-secondary" style="width:100%;" @click="modalConsultOpen = true">
+            <i class="fa-solid fa-calendar-check"></i> درخواست جلسه آزمایشی رایگان
+          </button>
+        </div>
+
+        <!-- Floating badge 2 -->
+        <div class="floating-badge floating-badge-2">
+          <div style="background:var(--accent-light); color:var(--accent); width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center;">
+            <i class="fa-solid fa-shield"></i>
+          </div>
+          <div>
+            <div style="font-weight:700; font-size:0.85rem;">۱۰۰٪ ضمانت بازگشت وجه</div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">در صورت عدم رضایت جلسه اول</div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 3. Categories / Language Grid (Like Tikkaa) -->
+<section style="padding: 40px 0;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">دسته‌بندی‌های تخصصی</span>
+      <h2 class="section-title">چه حوزه‌ای را می‌خواهید شروع کنید؟</h2>
+      <p class="section-subtitle">از بین دسته‌بندی‌ها و زبان‌های مختلف، مسیر مناسب یادگیری خود را پیدا کنید.</p>
+    </div>
+
+    <div class="categories-grid">
+      {% if categories %}
+        {% for cat in categories %}
+          <a href="{% url 'services:service_list' %}?category={{ cat.slug }}" class="category-card">
+            <div class="category-icon-box" style="background-color: {{ cat.color_accent|default:'var(--primary)' }};">
+              <i class="fa-solid {{ cat.icon|default:'fa-graduation-cap' }}"></i>
+            </div>
+            <div class="category-title">{{ cat.title }}</div>
+            <div class="category-count">{{ cat.services.count }} خدمت فعال</div>
+          </a>
+        {% endfor %}
+      {% else %}
+        <!-- Demo Static Categories if DB empty -->
+        <a href="{% url 'services:service_list' %}" class="category-card">
+          <div class="category-icon-box" style="background-color: #372F7B;"><i class="fa-solid fa-language"></i></div>
+          <div class="category-title">زبان انگلیسی</div>
+          <div class="category-count">مکالمه، آیلتس، کودکان</div>
+        </a>
+        <a href="{% url 'services:service_list' %}" class="category-card">
+          <div class="category-icon-box" style="background-color: #008C95;"><i class="fa-solid fa-landmark"></i></div>
+          <div class="category-title">زبان آلمانی</div>
+          <div class="category-count">گوته، تلک، مهاجرت</div>
+        </a>
+        <a href="{% url 'services:service_list' %}" class="category-card">
+          <div class="category-icon-box" style="background-color: #FF7A00;"><i class="fa-solid fa-earth-europe"></i></div>
+          <div class="category-title">زبان فرانسه</div>
+          <div class="category-count">DELF, DALF, TCF</div>
+        </a>
+        <a href="{% url 'services:service_list' %}" class="category-card">
+          <div class="category-icon-box" style="background-color: #E63946;"><i class="fa-solid fa-passport"></i></div>
+          <div class="category-title">زبان ترکی استانبولی</div>
+          <div class="category-count">تومر، مکالمه تجاری</div>
+        </a>
+        <a href="{% url 'services:service_list' %}" class="category-card">
+          <div class="category-icon-box" style="background-color: #7928CA;"><i class="fa-solid fa-laptop-code"></i></div>
+          <div class="category-title">مهارت‌های دیجیتال</div>
+          <div class="category-count">هوش مصنوعی، نرم‌افزار</div>
+        </a>
+        <a href="{% url 'services:service_list' %}" class="category-card">
+          <div class="category-icon-box" style="background-color: #059669;"><i class="fa-solid fa-briefcase"></i></div>
+          <div class="category-title">پکیج سازمانی</div>
+          <div class="category-count">ویژه شرکت‌ها و بیزینس‌ها</div>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- 4. Featured Services / Products -->
+<section style="padding: 40px 0 60px;">
+  <div class="container">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 30px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <span class="section-tag">دوره‌ها و خدمات ویژه</span>
+        <h2 style="font-size:1.8rem; font-weight:800; color:var(--dark);">محبوب‌ترین خدمات آموزشی ما</h2>
+      </div>
+      <a href="{% url 'services:service_list' %}" class="btn btn-outline-primary btn-sm">
+        مشاهده تمام خدمات <i class="fa-solid fa-arrow-left"></i>
+      </a>
+    </div>
+
+    <div class="services-grid">
+      {% for service in services %}
+        <div class="service-card">
+          <div class="service-card-image">
+            {% if service.cover_image %}
+              <img src="{{ service.cover_image.url }}" alt="{{ service.title }}">
+            {% else %}
+              <i class="fa-solid {{ service.icon|default:'fa-book-open' }}" style="font-size: 3.5rem; color: var(--primary); opacity: 0.85;"></i>
+            {% endif %}
+            <span class="badge badge-primary service-badge-cat">{{ service.category.title }}</span>
+          </div>
+
+          <div class="service-card-body">
+            <h3 class="service-title">
+              <a href="{{ service.get_absolute_url }}">{{ service.title }}</a>
+            </h3>
+            <p class="service-desc">{{ service.short_description|truncatechars:120 }}</p>
+
+            <div class="service-meta">
+              <div class="service-price">
+                {% if service.price > 0 %}
+                  {{ service.price|intcomma }} <span>تومان / {{ service.price_unit }}</span>
+                {% else %}
+                  <span>رایگان / مشاوره</span>
+                {% endif %}
+              </div>
+              <a href="{{ service.get_absolute_url }}" class="btn btn-primary btn-sm">
+                جزئیات <i class="fa-solid fa-arrow-left"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <!-- Demo Services if empty -->
+        <div class="service-card">
+          <div class="service-card-image">
+            <i class="fa-solid fa-comments" style="font-size: 3.5rem; color: var(--primary);"></i>
+            <span class="badge badge-primary service-badge-cat">انگلیسی</span>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-title">کلاس خصوصی آنلاین مکالمه انگلیسی</h3>
+            <p class="service-desc">تقویت مکالمه روان در کوتاه‌ترین زمان با تمرکز بر اصطلاحات روزمره و کاری همراه استاد اختصاصی.</p>
+            <div class="service-meta">
+              <div class="service-price">۲۵۰,۰۰۰ <span>تومان / جلسه</span></div>
+              <button class="btn btn-primary btn-sm" @click="modalConsultOpen = true">مشاوره</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-image">
+            <i class="fa-solid fa-award" style="font-size: 3.5rem; color: var(--secondary);"></i>
+            <span class="badge badge-secondary service-badge-cat">آزمون بین‌المللی</span>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-title">پکیج فشرده آمادگی آزمون IELTS</h3>
+            <p class="service-desc">تکنیک‌های چهارگانه آزمون آیلتس (Speaking, Writing, Listening, Reading) با اگزمینرهای مجرب.</p>
+            <div class="service-meta">
+              <div class="service-price">۳۵۰,۰۰۰ <span>تومان / جلسه</span></div>
+              <button class="btn btn-primary btn-sm" @click="modalConsultOpen = true">مشاوره</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-image">
+            <i class="fa-solid fa-building" style="font-size: 3.5rem; color: var(--accent);"></i>
+            <span class="badge badge-accent service-badge-cat">سازمانی</span>
+          </div>
+          <div class="service-card-body">
+            <h3 class="service-title">آموزش زبان تجاری ویژه سازمان‌ها و استارتاپ‌ها</h3>
+            <p class="service-desc">برگزاری دوره‌های مکاتبات بازرگانی، مذاکرات تجاری و جلسات کاری برای پرسنل و مدیران شرکت‌ها.</p>
+            <div class="service-meta">
+              <div class="service-price">سفارشی <span>پکیج تیمی</span></div>
+              <button class="btn btn-primary btn-sm" @click="modalConsultOpen = true">استعلام</button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- 5. Why Choose Us (Like Tikkaa: ۴ مزیت کلیدی) -->
+<section class="why-us-section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">چرا پلتفرم ما؟</span>
+      <h2 class="section-title">مزایای یادگیری آنلاین با ما</h2>
+      <p class="section-subtitle">ما یادگیری را ساده، منعطف و نتیجه‌بخش کرده‌ایم.</p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
+        <h3 class="feature-title">برنامه‌ریزی سفارشی</h3>
+        <p class="feature-desc">ساعات جلسات را متناسب با تایم آزاد خود انتخاب کنید و بدون استرس یاد بگیرید.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon" style="background:var(--primary-bg); color:var(--primary);"><i class="fa-solid fa-user-check"></i></div>
+        <h3 class="feature-title">اساتید تایید صلاحیت شده</h3>
+        <p class="feature-desc">تمامی مدرسین پس از ارزیابی رزومه، مصاحبه و آزمون تخصصی تدریس انتخاب شده‌اند.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon" style="background:var(--accent-light); color:var(--accent);"><i class="fa-solid fa-shield-heart"></i></div>
+        <h3 class="feature-title">ضمانت بازگشت وجه</h3>
+        <p class="feature-desc">در صورتی که از اولین جلسه خود رضایت نداشتید، تمام هزینه جلسه عودت داده می‌شود.</p>
+      </div>
+
+      <div class="feature-box">
+        <div class="feature-icon"><i class="fa-solid fa-headset"></i></div>
+        <h3 class="feature-title">پشتیبان اختصاصی</h3>
+        <p class="feature-desc">پشتیبان اختصاصی در تمام طول دوره همراه شماست تا روند پیشرفت شما بررسی شود.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Fast Consultation Banner (Lead Generation) -->
+<section class="container">
+  <div class="cta-banner">
+    <div>
+      <span class="badge" style="background:rgba(255,255,255,0.2); color:#fff; margin-bottom:12px;">مشاوره رایگان</span>
+      <h2>نمی‌دانید از کجا شروع کنید؟<br>استاد و دوره مناسبتان را پیشنهاد می‌دهیم!</h2>
+      <p>کافیست شماره تماس خود را وارد نمایید. مشاوران تخصصی ما ضمن سنجش نیاز، بهترین دوره و استاد را به شما معرفی خواهند کرد.</p>
+    </div>
+
+    <div class="cta-form-card">
+      <h4 style="font-weight:800; font-size:1.15rem; color:var(--primary); margin-bottom:14px;">ثبت درخواست مشاوره</h4>
+      <form action="{% url 'services:request_consultation' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <div class="form-group">
+          <input type="text" name="full_name" required class="form-control" placeholder="نام و نام خانوادگی">
+        </div>
+        <div class="form-group">
+          <input type="tel" name="phone" required class="form-control" placeholder="شماره تماس (مثال: 09123456789)">
+        </div>
+        <button type="submit" class="btn btn-secondary" style="width:100%;">
+          <i class="fa-solid fa-phone"></i> تماس مشاور با من
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- 7. Latest Blog Articles -->
+<section style="padding: 40px 0 60px;">
+  <div class="container">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 30px; flex-wrap:wrap; gap:16px;">
+      <div>
+        <span class="section-tag">مطالب آموزشی و مقالات</span>
+        <h2 style="font-size:1.8rem; font-weight:800; color:var(--dark);">آخرین یادداشت‌های وبلاگ</h2>
+      </div>
+      <a href="{% url 'blog:post_list' %}" class="btn btn-outline-primary btn-sm">
+        مشاهده وبلاگ <i class="fa-solid fa-arrow-left"></i>
+      </a>
+    </div>
+
+    <div class="services-grid">
+      {% for post in latest_posts %}
+        <div class="blog-card">
+          <div class="blog-card-img">
+            {% if post.cover_image %}
+              <img src="{{ post.cover_image.url }}" alt="{{ post.title }}">
+            {% else %}
+              <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--primary-bg); color:var(--primary); font-size:2rem;">
+                <i class="fa-solid fa-newspaper"></i>
+              </div>
+            {% endif %}
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-date">
+              <i class="fa-regular fa-clock"></i> {{ post.reading_time }} دقیقه مطالعه | {{ post.published_at|date:"Y/m/d" }}
+            </div>
+            <h3 class="blog-title">
+              <a href="{{ post.get_absolute_url }}">{{ post.title }}</a>
+            </h3>
+            <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin-bottom:14px; flex:1;">
+              {{ post.summary|truncatechars:100 }}
+            </p>
+            <a href="{{ post.get_absolute_url }}" style="color:var(--secondary); font-weight:700; font-size:0.85rem; display:inline-flex; align-items:center; gap:6px;">
+              ادامه مطلب <i class="fa-solid fa-arrow-left"></i>
+            </a>
+          </div>
+        </div>
+      {% empty %}
+        <!-- Demo Blog Posts if empty -->
+        <div class="blog-card">
+          <div class="blog-card-img">
+            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--primary-bg); color:var(--primary); font-size:2rem;">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-date"><i class="fa-regular fa-clock"></i> ۵ دقیقه مطالعه</div>
+            <h3 class="blog-title"><a href="{% url 'blog:post_list' %}">چگونه در ۶ ماه به مکالمه روان انگلیسی برسیم؟</a></h3>
+            <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin-bottom:14px;">راهنمای گام به گام تقویت مهارت شنیداری و گفتاری با استفاده از تکنیک سایه‌زنی.</p>
+            <a href="{% url 'blog:post_list' %}" style="color:var(--secondary); font-weight:700; font-size:0.85rem;">ادامه مطلب &larr;</a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-card-img">
+            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--secondary-light); color:var(--secondary); font-size:2rem;">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-date"><i class="fa-regular fa-clock"></i> ۷ دقیقه مطالعه</div>
+            <h3 class="blog-title"><a href="{% url 'blog:post_list' %}">مقایسه جامع آزمون آیلتس (IELTS) و تافل (TOEFL)</a></h3>
+            <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin-bottom:14px;">کدام آزمون برای مهاجرت تحصیلی یا کاری شما مناسب‌تر است؟ تحلیل کامل هزینه‌ها و نمره‌دهی.</p>
+            <a href="{% url 'blog:post_list' %}" style="color:var(--secondary); font-weight:700; font-size:0.85rem;">ادامه مطلب &larr;</a>
+          </div>
+        </div>
+
+        <div class="blog-card">
+          <div class="blog-card-img">
+            <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:var(--accent-light); color:var(--accent); font-size:2rem;">
+              <i class="fa-solid fa-flag"></i>
+            </div>
+          </div>
+          <div class="blog-card-content">
+            <div class="blog-date"><i class="fa-regular fa-clock"></i> ۴ دقیقه مطالعه</div>
+            <h3 class="blog-title"><a href="{% url 'blog:post_list' %}">بهترین منابع خودآموز زبان آلمانی از سطح A1 تا B2</a></h3>
+            <p style="font-size:0.88rem; color:var(--text-muted); line-height:1.6; margin-bottom:14px;">معرفی کتاب‌ها، پادکست‌ها و کانال‌های برتر برای یادگیری سریع گرامر و واژگان زبان آلمانی.</p>
+            <a href="{% url 'blog:post_list' %}" style="color:var(--secondary); font-weight:700; font-size:0.85rem;">ادامه مطلب &larr;</a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% endblock %}

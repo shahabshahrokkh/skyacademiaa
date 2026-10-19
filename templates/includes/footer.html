@@ -1,0 +1,96 @@
+{% load static %}
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+
+      <!-- Column 1: Brand & About -->
+      <div>
+        <div class="header-brand" style="margin-bottom: 12px;">
+          <div class="brand-icon">
+            <i class="fa-solid fa-graduation-cap"></i>
+          </div>
+          <span>{{ site_settings.site_name|default:"اسکای آکادمیا" }}</span>
+        </div>
+        <p class="footer-brand-desc">
+          {{ site_settings.site_description|default:"پلتفرم تخصصی آموزش و ارائه خدمات هوشمند، با رویکرد آموزش پروژه‌محور و تضمین کیفیت جهت ارتقای مهارت‌های فردی و سازمانی." }}
+        </p>
+        <div class="footer-socials">
+          {% if site_settings.instagram %}
+            <a href="{{ site_settings.instagram }}" target="_blank" class="social-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          {% endif %}
+          {% if site_settings.telegram %}
+            <a href="{{ site_settings.telegram }}" target="_blank" class="social-btn" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+          {% endif %}
+          {% if site_settings.whatsapp %}
+            <a href="https://wa.me/{{ site_settings.whatsapp }}" target="_blank" class="social-btn" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          {% endif %}
+          {% if site_settings.linkedin %}
+            <a href="{{ site_settings.linkedin }}" target="_blank" class="social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          {% endif %}
+        </div>
+      </div>
+
+      <!-- Column 2: خدمات و دوره‌ها -->
+      <div>
+        <h4 class="footer-col-title">خدمات و دوره‌ها</h4>
+        <div class="footer-links">
+          <a href="{% url 'services:service_list' %}">کلاس‌های خصوصی آنلاین</a>
+          <a href="{% url 'services:service_list' %}">آمادگی آزمون‌های بین‌المللی</a>
+          <a href="{% url 'services:service_list' %}">دوره‌های فشرده مکالمه</a>
+          <a href="{% url 'services:service_list' %}">آموزش زبان‌های خاص</a>
+          <a href="{% url 'services:service_list' %}">پکیج‌های سازمانی و شرکتی</a>
+        </div>
+      </div>
+
+      <!-- Column 3: دسترسی سریع -->
+      <div>
+        <h4 class="footer-col-title">دسترسی سریع</h4>
+        <div class="footer-links">
+          <a href="{% url 'pages:about_us' %}">درباره ما و اساتید</a>
+          <a href="{% url 'portfolio:project_list' %}">نمونه کارها و سوابق</a>
+          <a href="{% url 'blog:post_list' %}">وبلاگ و مقالات آموزشی</a>
+          <a href="{% url 'pages:faq' %}">سوالات متداول (FAQ)</a>
+          <a href="{% url 'accounts:contact' %}">فرم تماس و پشتیبانی</a>
+        </div>
+      </div>
+
+      <!-- Column 4: اطلاعات تماس -->
+      <div>
+        <h4 class="footer-col-title">ارتباط با ما</h4>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-phone"></i>
+          <span>تلفن: {{ site_settings.phone|default:"۰۲۱-۱۲۳۴۵۶۷۸" }}</span>
+        </div>
+        <div class="footer-contact-item">
+          <i class="fa-solid fa-envelope"></i>
+          <span>ایمیل: {{ site_settings.email|default:"info@sky-accademia.ir" }}</span>
+        </div>
+        {% if site_settings.address %}
+        <div class="footer-contact-item" style="align-items: flex-start;">
+          <i class="fa-solid fa-location-dot" style="margin-top: 5px;"></i>
+          <span>{{ site_settings.address }}</span>
+        </div>
+        {% endif %}
+        
+        <!-- Trust badge / enamad mockup -->
+        <div style="margin-top: 20px; display: flex; gap: 12px;">
+          <div style="background:#fff; border:1px solid var(--border-color); border-radius:8px; padding:8px 12px; font-size:0.75rem; text-align:center; color:var(--text-muted);">
+            <i class="fa-solid fa-shield-halved" style="color:var(--secondary); font-size:1.2rem; display:block; margin-bottom:4px;"></i>
+            ضمانت کیفیت
+          </div>
+          <div style="background:#fff; border:1px solid var(--border-color); border-radius:8px; padding:8px 12px; font-size:0.75rem; text-align:center; color:var(--text-muted);">
+            <i class="fa-solid fa-headset" style="color:var(--primary); font-size:1.2rem; display:block; margin-bottom:4px;"></i>
+            پشتیبانی ۲۴/۷
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom">
+      <p>{{ site_settings.footer_text|default:"تمامی حقوق مادی و معنوی این وب‌سایت متعلق به این مجموعه می‌باشد." }}</p>
+      <p>طراحی شده با استک سبک Django + Alpine.js | آماده اجرا در PythonAnywhere</p>
+    </div>
+  </div>
+</footer>

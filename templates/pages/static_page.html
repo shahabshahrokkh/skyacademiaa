@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 50px 20px 80px; max-width: 900px;">
+  <article style="background: #fff; border-radius: var(--radius-md); padding: 40px; border: 1px solid var(--border-color); box-shadow: var(--shadow-sm);">
+    <h1 style="font-size: 2.1rem; font-weight: 800; color: var(--dark); margin-bottom: 24px; border-bottom: 1px solid var(--border-color); padding-bottom: 16px;">
+      {{ page.title }}
+    </h1>
+    <div style="font-size: 1.05rem; line-height: 2.1; color: var(--text-main);">
+      {{ page.content|linebreaks }}
+    </div>
+  </article>
+</div>
+{% endblock %}
